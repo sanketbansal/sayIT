@@ -1,0 +1,17 @@
+{
+  "name": "gcp",
+  "version": "1.0.0",
+  "description": "gcp configuration and development",
+  "main": "pubsub.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloud"
+  ],
+  "author": "sanket bansal",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.20.1"
+  }
+}

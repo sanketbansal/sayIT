@@ -1,0 +1,66 @@
+<mat-card #chatText class="chat-text">
+  <div *ngFor="let chat of chat_service.chats">
+    
+    <div class="texts" *ngFor="let text of chat.type0_" [ngSwitch]="text.type">
+      <mat-chip-list class="message" *ngSwitchCase="'message'">
+        <mat-chip color='primary' selected="true">{{text.val}}</mat-chip>
+      </mat-chip-list>
+
+      <mat-chip-list class="response" *ngSwitchCase="'response'">
+        <mat-chip color='accent' selected="true">{{text.val}} </mat-chip>
+      </mat-chip-list>
+
+      <mat-chip-list class="response" *ngSwitchCase="'pre-response'">
+        <!--mat-chip color='accent' selected="true">{{text.val}}</mat-chip-->
+        <img class="typing_gif" src="../../assets/typing.gif">
+      </mat-chip-list>
+
+      <!--button mat-mini-fab class="logo-button text-logo" *ngIf="text.src!=null">
+          <img class="logo" src="../../assets/GE.jpg">
+      </button-->
+
+      <!--img class="logo logo-button text-logo" src="../../assets/GE.jpg" *ngIf="text.src!=null"-->
+
+    </div>
+
+    <mat-card class="type1" *ngFor="let suggest of chat.type1_">
+      <img [src]="suggest['imageUrl']">
+      <mat-divider></mat-divider>
+      <span>{{suggest['title']}}</span>
+      <mat-divider [inset]='true' ></mat-divider>
+      <div *ngFor="let suggestion of suggest['buttons']">
+        <a mat-button target="_blank" [href]="suggestion['postback']" color='accent'selectable='true'>{{suggestion['text']}}</a>
+        <mat-divider [inset]='true'></mat-divider>
+      </div>
+    </mat-card>
+
+    <div class="type3" *ngFor="let suggest of chat.type3_">
+      <img [src]="suggest['imageUrl']">
+    </div>
+
+    <div class="texts-suggest" *ngFor="let suggest of chat.type2_">
+      <div class="title">
+        <mat-chip class="title-chip" color='accent' selected="true">{{suggest['title']}}</mat-chip>
+        <!--button mat-icon-button class="logo-button suggest-logo" >
+          <img class="logo" src="../../assets/GE.jpg">
+        </button-->
+        <!--img class="logo logo-button suggest-logo" src="../../assets/GE.jpg"-->
+      </div>
+
+      <mat-chip-list class="suggestion">
+          <mat-chip class="chip" color="accent" (click)="send(suggestion)" *ngFor="let suggestion of suggest['replies']" selectable='true'>{{suggestion}}</mat-chip>
+      </mat-chip-list>
+    </div>
+
+  </div>
+</mat-card>
+
+<!--div id="type3_1"></div-->
+
+<mat-card class="chat-type">
+  <input #userInput  [(ngModel)]="msg" (keyup.enter)="send(userInput.value)" placeholder="Send message here..">
+  <button mat-raised-button color='primary' (click)="send(userInput.value)">
+    Send
+    <!--i class="material-icons">send</i-->
+  </button>
+</mat-card>
